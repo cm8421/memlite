@@ -9,6 +9,7 @@
 import { RetrievalEngine } from '../core/RetrievalEngine.js';
 import { SQLiteStore } from '../storage/SQLiteStore.js';
 import { SilentMode } from '../config/SilentMode.js';
+import { generateId, truncate, PATTERNS } from '../utils/index.js';
 import type { MemoryExchange } from '../types/memory.js';
 
 export interface HookContext {
@@ -126,13 +127,13 @@ export class HookManager {
     response: string,
     importanceScore: number
   ): MemoryExchange {
-    const id = `hook_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    const id = generateId('hook');
     const timestamp = Date.now();
 
     // 提取核心内容（取对话的核心部分）
     const combined = `${prompt}\n${response}`;
-    const exchangeCore = this.truncate(combined, 500);
-    const specificContext = this.truncate(response, 200);
+    const exchangeCore = truncate(combined, 500);
+    const specificContext = truncate(response, 200);
 
     // 简单提取标签（从问题中提取）
     const tags = this.extractTags(prompt);
@@ -152,14 +153,6 @@ export class HookManager {
   }
 
   /**
-   * 截断文本到指定长度
-   */
-  private truncate(text: string, maxLength: number): string {
-    if (text.length <= maxLength) return text;
-    return text.slice(0, maxLength - 3) + '...';
-  }
-
-  /**
    * 从文本中提取简单标签
    */
   private extractTags(text: string): string[] {
@@ -171,12 +164,12 @@ export class HookManager {
     }
 
     // 检测代码
-    if (/```|function|class|const|let|var/.test(text)) {
+    if (PATTERNS.code.test(text)) {
       tags.push('code');
     }
 
     // 检测问题
-    if (/\?|what|how|why|when|where|who|which/.test(text.toLowerCase())) {
+    if (PATTERNS.question.test(text.toLowerCase())) {
       tags.push('question');
     }
 

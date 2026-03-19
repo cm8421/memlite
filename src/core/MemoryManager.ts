@@ -10,6 +10,7 @@
 import type { MemoryExchange, SearchResult } from '../types/memory.js';
 import { ForgetModel } from './ForgetModel.js';
 import { ImportanceScoring } from './ImportanceScoring.js';
+import { clamp } from '../utils/index.js';
 
 /**
  * 记忆通路类型
@@ -247,7 +248,7 @@ export class MemoryManager {
 
     return {
       pathway,
-      confidence: Math.min(1, Math.max(0, confidence)),
+      confidence: clamp(confidence, 0, 1),
       dopamineSignal,
       factors: {
         importance,
@@ -564,7 +565,7 @@ export class MemoryManager {
     const rpe = actualReward - expectedReward;
 
     // 归一化到 [-1, 1]
-    return Math.max(-1, Math.min(1, rpe));
+    return clamp(rpe, -1, 1);
   }
 
   /**

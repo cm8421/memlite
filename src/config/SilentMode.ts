@@ -7,6 +7,8 @@
  * - 注入记忆数量限制
  */
 
+import { clamp, PATTERNS } from '../utils/index.js';
+
 export interface SilentModeConfig {
   /** 启用静默模式 */
   enabled: boolean;
@@ -116,18 +118,16 @@ export class SilentMode {
     if (totalLength > 2000) score += 0.1;
 
     // 问题词因子：包含疑问词的对话可能包含更多知识
-    const questionWords = /what|how|why|when|where|who|which|explain|describe|define/i;
-    if (questionWords.test(prompt)) score += 0.1;
+    if (PATTERNS.question.test(prompt)) score += 0.1;
 
     // 代码因子：涉及代码的对话通常更重要
-    const codePatterns = /```|function|class|const|let|var|import|export/i;
-    if (codePatterns.test(prompt) || codePatterns.test(response)) score += 0.1;
+    if (PATTERNS.code.test(prompt) || PATTERNS.code.test(response)) score += 0.1;
 
     // 重复因子：太短的对话价值有限
     if (totalLength < 50) score -= 0.2;
 
     // 确保分数在 0-1 范围内
-    return Math.max(0, Math.min(1, score));
+    return clamp(score, 0, 1);
   }
 
   /**
