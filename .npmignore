@@ -1,0 +1,42 @@
+# 排除测试文件
+tests/
+*.test.ts
+*.spec.ts
+
+# 排除基准测试
+benchmarks/
+data/
+
+# 排除源代码（如果只需要发布编译后的 dist）
+# src/
+
+# 排除开发配置
+.vscode/
+.idea/
+*.log
+
+# 排除临时文件
+tmp/
+temp/
+*.tmp
+
+# 排除文档（如果不需要）
+# README.md 保留在 files 中
+docs/
+*.md
+!README.md
+!LICENSE
+!skills/**/*.md
+
+# 排除 git
+.git/
+.gitignore
+
+# 排除 CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# 其他
+.DS_Store
+Thumbs.db

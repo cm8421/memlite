@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-03-18T08:44:05+08:00",
+  "projectName": "memlite",
+  "projectDescription": "个人使用的 Agent 记忆系统",
+  "rootClaudeMd": "./CLAUDE.md",
+  "modules": [
+    {
+      "path": ".spec-workflow",
+      "claudeMd": "./.spec-workflow/CLAUDE.md",
+      "purpose": "规格工作流模板系统",
+      "language": "Markdown",
+      "status": "configured",
+      "hasSourceCode": false,
+      "hasTests": false,
+      "entryPoints": [],
+      "interfaces": [
+        "templates/requirements-template.md",
+        "templates/design-template.md",
+        "templates/tasks-template.md",
+        "templates/product-template.md",
+        "templates/tech-template.md",
+        "templates/structure-template.md"
+      ],
+      "importantPaths": [
+        ".spec-workflow/templates/",
+        ".spec-workflow/user-templates/"
+      ]
+    }
+  ],
+  "coverage": {
+    "estimatedTotalFiles": 7,
+    "scannedFiles": 7,
+    "coveragePercent": 100,
+    "modulesCovered": 1,
+    "modulesTotal": 1
+  },
+  "ignored": {
+    "patterns": [
+      "node_modules/**",
+      ".git/**",
+      ".github/**",
+      "dist/**",
+      "build/**",
+      ".next/**",
+      "__pycache__/**",
+      "*.lock",
+      "*.log",
+      "*.bin",
+      "*.pdf",
+      "*.png",
+      "*.jpg",
+      "*.jpeg",
+      "*.gif",
+      "*.mp4",
+      "*.zip",
+      "*.tar",
+      "*.gz"
+    ],
+    "gitignoreExists": false,
+    "skippedDirectories": [],
+    "skippedReasons": []
+  },
+  "gaps": {
+    "missingSourceCode": true,
+    "missingTests": true,
+    "missingDataModels": true,
+    "missingTechStack": true,
+    "notes": [
+      "项目处于初始化阶段，尚未创建源代码",
+      "技术栈待确定",
+      "建议优先确定：语言、存储方案、API 风格"
+    ]
+  },
+  "nextSteps": [
+    "确定核心技术栈（建议：Go/Python/TypeScript）",
+    "创建 src/ 目录结构",
+    "实现核心记忆存储模块",
+    "定义数据模型（Memory 结构）",
+    "实现检索与召回接口"
+  ],
+  "truncated": false
+}

@@ -1,0 +1,74 @@
+{
+  "name": "memlite-mcp-server",
+  "version": "0.1.0",
+  "description": "轻量级Agent记忆系统 - 零依赖、单文件存储、高性能向量检索",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "memlite": "dist/index.js",
+    "memlite-hook": "dist/cli.js"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "setup:models": "chmod +x scripts/download-models.sh && ./scripts/download-models.sh",
+    "benchmark": "npm test -- --run tests/benchmark/",
+    "benchmark:vector": "npm run setup:models && npm test -- --run tests/benchmark/locomo-real.test.ts tests/benchmark/longmem-real.test.ts",
+    "hook": "node dist/cli.js hook",
+    "stats": "node dist/cli.js stats",
+    "search": "node dist/cli.js search",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "memory",
+    "agent",
+    "ai",
+    "vector-search",
+    "sqlite",
+    "claude-code",
+    "context-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/memlite.git"
+  },
+  "homepage": "https://github.com/your-username/memlite#readme",
+  "bugs": {
+    "url": "https://github.com/your-username/memlite/issues"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "models/",
+    "scripts/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "better-sqlite3": "^11.8.1",
+    "onnxruntime-node": "^1.24.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  }
+}
