@@ -29,6 +29,13 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Models (download via scripts/download-models.sh)
+models/
+*.onnx
+*.pt
+*.safetensors
+
 # Temporary files
 tmp/
 temp/
+temp_*.ts
